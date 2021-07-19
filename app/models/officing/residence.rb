@@ -99,7 +99,7 @@ class Officing::Residence
   end
 
   def district_code
-    @census_api_response.district_code
+    @census_api_response.postal_code
   end
 
   def gender

@@ -55,7 +55,7 @@ class Signature < ApplicationRecord
       email: nil,
       date_of_birth: @census_api_response.date_of_birth,
       gender: @census_api_response.gender,
-      geozone: Geozone.find_by(census_code: @census_api_response.district_code)
+      geozone: Geozone.find_by(census_code: @census_api_response.postal_code)
     }
     User.create!(user_params)
   end

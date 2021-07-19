@@ -3,3 +3,5 @@
 # * English: https://github.com/consul/consul/blob/master/CUSTOMIZE_EN.md#gemfile
 # * Spanish: https://github.com/consul/consul/blob/master/CUSTOMIZE_ES.md#gemfile
 #
+gem "ed25519", ">= 1.2", "< 2.0", require: false
+gem "bcrypt_pbkdf", ">= 1.0", "< 2.0", require: false
