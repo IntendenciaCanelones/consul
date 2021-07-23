@@ -101,11 +101,12 @@ es:
           organization_signup_link: Regístrate aquí
           document_label: Sólo números
           document_number: Cédula de Identidad
+          domicilio: Domicilio
+          domicilio_label: Domicilio
+          date_of_birth_label: Fecha de nacimiento
           gender: Género
           gender_note: Sólo con fines estadísticos.
           cif_label: Adjunte imagen del frente de la cédula de identidad<br>en formato JPEG, PNG o TIFF
-          cid_label: Adjunte imagen del dorso de la cédula de identidad
-          constancia_label: Adjunte constancia de domicilio
           geozone_id_label: Municipio
           password_confirmation_label: Repite la contraseña anterior
           submit: Registrarse

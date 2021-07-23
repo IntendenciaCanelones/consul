@@ -13,10 +13,7 @@ class User < ApplicationRecord
 
   has_attached_file :cif, :styles => { :thumb=> "100x100#", :small => "150x150>" },
         :path => ":rails_root/private/documents/:attachment/:id/:style/:basename.:extension"
-  has_attached_file :cid, :styles => { :thumb=> "100x100#", :small => "150x150>" },
-        :path => ":rails_root/private/documents/:attachment/:id/:style/:basename.:extension"
-  has_attached_file :constancia, :styles => { :thumb=> "100x100#", :small => "150x150>" },
-        :path => ":rails_root/private/documents/:attachment/:id/:style/:basename.:extension"
+
   has_one :administrator
   has_one :moderator
   has_one :valuator
@@ -95,15 +92,18 @@ class User < ApplicationRecord
 
   validates :email, presence: true, if: :email_required?
 
+  validates :document_number, presence: true, if: :cedula_required?
+  validates :document_number, numericality: true
+  validate :validate_cedula_length
+  validates :document_number, uniqueness: true
+  validate :validate_cedula_format
+
+  validates :date_of_birth, presence: true, if: :date_of_birth_required?
+  validate :validate_age?
+
+  validates :domicilio, presence: true, if: :domicilio_required?
+
   validates :geozone_id, inclusion: { in: 1..30 }
-
-  validates_attachment_presence :constancia, if: :constancia_required?
-  validates_attachment :constancia, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/tiff"] }
-  validates_attachment_size :constancia, :in => 0.megabytes..20.megabytes
-
-  validates_attachment_presence :cid, if: :cid_required?
-  validates_attachment :cid, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/tiff"] }
-  validates_attachment_size :cid, :in => 0.megabytes..20.megabytes
 
   validates_attachment_presence :cif, if: :cif_required?
   validates_attachment :cif, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/tiff"] }
@@ -361,19 +361,75 @@ class User < ApplicationRecord
     !erased? && unverified?
   end
 
+  def date_of_birth_required?
+    !organization? && !erased?
+  end
+
   def cif_required?
     !organization? && !erased?
   end
 
-  def cid_required?
-    !organization? && !erased?
-  end
-
-  def constancia_required?
-    !organization? && !erased?
-  end
-
   def email_required?
+    !organization? && !erased?
+  end
+
+  def cedula_required?
+    !organization? && !erased?
+  end
+
+  def validate_cedula_format
+    octavo = -1
+    verificacion = -2
+    cedula = document_number
+    if document_number.length == 7
+      cedula = "0" + document_number
+    end
+    if cedula.length == 8
+      primero = cedula.byteslice(0).to_f
+      segundo = cedula.byteslice(1).to_f
+      tercero = cedula.byteslice(2).to_f
+      cuarto = cedula.byteslice(3).to_f
+      quinto = cedula.byteslice(4).to_f
+      sexto = cedula.byteslice(5).to_f
+      septimo = cedula.byteslice(6).to_f
+      octavo = cedula.byteslice(7).to_f
+      if primero == segundo && segundo == tercero && tercero == cuarto && cuarto == quinto && quinto == sexto && sexto == septimo
+        errors.add(:document_number, "Su cédula no verifica")
+      else
+        primero = primero * 2
+        segundo = segundo * 9
+        tercero = tercero * 8
+        cuarto = cuarto * 7
+        quinto = quinto * 6
+        sexto = sexto * 3
+        septimo = septimo  * 4
+        total = primero + segundo + tercero + cuarto + quinto + sexto + septimo
+        verificacion = 10 - (total%10)
+        if verificacion == 10
+          verificacion = 0
+        end
+      end
+    end
+    if octavo != verificacion
+      errors.add(:document_number, "Su cédula no verifica")
+    end
+  end
+
+  def validate_cedula_length
+    validator = ActiveModel::Validations::LengthValidator.new(
+      attributes: :document_number,
+      maximum: 8,
+      minimum: 7)
+    validator.validate(self)
+  end
+
+  def validate_age?
+    if date_of_birth.to_i > 14.years.ago.to_i
+      errors.add(:date_of_birth, 'Debes ser mayor a 14 años.')
+    end
+  end
+
+  def domicilio_required?
     !organization? && !erased?
   end
 

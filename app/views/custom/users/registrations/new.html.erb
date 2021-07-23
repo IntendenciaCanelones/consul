@@ -24,6 +24,12 @@
 
       <%= f.email_field :email %>
 
+        <%= f.text_field :document_number,
+				placeholder: t("devise_views.users.registrations.new.document_label"),
+				label: t("devise_views.users.registrations.new.document_number") %>
+
+        <%= f.date_field :date_of_birth, label: t("devise_views.users.registrations.new.date_of_birth_label") %>
+
 	<%= f.select :gender, [["Prefiero no indicar", 1], ["Hombre", :male], ["Mujer", :female]],
 				label: t("devise_views.users.registrations.new.gender"),
 				hint: t("devise_views.users.registrations.new.gender_note") %>
@@ -31,9 +37,7 @@
 	<%= f.file_field :cif, label: t("devise_views.users.registrations.new.cif_label"),
 				hint: t("devise_views.users.registrations.new.cif_note") %>
 
-	<%= f.file_field :cid, label: t("devise_views.users.registrations.new.cid_label") %>
-
-	<%= f.file_field :constancia, label: t("devise_views.users.registrations.new.constancia_label") %>
+	<%= f.text_field :domicilio, label: t("devise_views.users.registrations.new.domicilio") %>
 
 	<%= f.select :geozone_id, [["- Seleccione su municipio -",0], ["18 de Mayo",1], ["Aguas Corrientes",2], ["Atlántida",3], ["Barros Blancos",4], ["Canelones",5], ["Ciudad de la Costa",6], ["Empalme Olmos",7], ["Joaquín Suárez",8], ["La Floresta",9], ["La Paz",10], ["Las Piedras",11], ["Los Cerrillos",12], ["Migues",13], ["Montes",14], ["Nicolich",15], ["Pando",16], ["Parque del Plata",17], ["Paso Carrasco",18], ["Progreso",19], ["Salinas",20], ["San Antonio",21], ["San Bautista",22], ["San Jacinto",23], ["San Ramón",24], ["Santa Lucía",25], ["Santa Rosa",26], ["Sauce",27], ["Soca",28], ["Tala",29], ["Toledo",30]], label: t("devise_views.users.registrations.new.geozone_id_label") %>
 
