@@ -39,7 +39,12 @@
 
 	<%= f.text_field :domicilio, label: t("devise_views.users.registrations.new.domicilio") %>
 
-	<%= f.select :geozone_id, [["- Seleccione su municipio -",0], ["18 de Mayo",1], ["Aguas Corrientes",2], ["Atlántida",3], ["Barros Blancos",4], ["Canelones",5], ["Ciudad de la Costa",6], ["Empalme Olmos",7], ["Joaquín Suárez",8], ["La Floresta",9], ["La Paz",10], ["Las Piedras",11], ["Los Cerrillos",12], ["Migues",13], ["Montes",14], ["Nicolich",15], ["Pando",16], ["Parque del Plata",17], ["Paso Carrasco",18], ["Progreso",19], ["Salinas",20], ["San Antonio",21], ["San Bautista",22], ["San Jacinto",23], ["San Ramón",24], ["Santa Lucía",25], ["Santa Rosa",26], ["Sauce",27], ["Soca",28], ["Tala",29], ["Toledo",30]], label: t("devise_views.users.registrations.new.geozone_id_label") %>
+	<div class="field">
+        <%= f.collection_select :geozone_id, Geozone.order(:name), :id, :name, { include_blank: true } %>
+        </div>
+        <div class="field">
+        <%= f.grouped_collection_select :geozones_area_id, Geozone.order(:name), :geozones_areas, :name, :id, :name %>
+        </div>
 
       <%= f.password_field :password, autocomplete: "off" %>
 
