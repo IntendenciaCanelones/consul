@@ -1,6 +1,7 @@
 es:
   attributes:
-    geozone_id: "Ámbito de actuación"
+    geozone_id: "Municipio"
+    geozones_area_id: "Barrio"
     results_enabled: "Mostrar resultados"
     stats_enabled: "Mostrar estadísticas"
     advanced_stats_enabled: "Mostrar estadísticas avanzadas"
