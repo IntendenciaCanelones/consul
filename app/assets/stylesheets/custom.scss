@@ -2,3 +2,18 @@
 //
 // You can also create SCSS files in the app/assets/stylesheets/custom/
 // folder and they will be loaded automatically.
+
+$color: #6ba43a;
+$color2: #436724;
+
+.admin-sidebar {
+ background: $color;
+}
+
+.sidebar-hover {
+ background: $color;
+}
+
+.admin-sidebar li a:hover {
+ background: $color2;
+}
