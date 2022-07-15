@@ -27,6 +27,33 @@
           validateUsername(username);
         }
       });
+      jQuery(function() {
+  var geozone, geozonesarea, escaped_geozone, loaded_geozone, options;
+  loaded_geozone = $('#user_geozone_id :selected').text();
+  geozonesarea = $('#user_geozones_area_id').html();
+  $('#user_geozones_area_id').parent().hide();
+  if (loaded_geozone.length !== 0) {
+    geozone = $('#user_geozone_id :selected').text();
+    escaped_geozone = geozone.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
+    options = $(geozonesarea).filter("optgroup[label=" + escaped_geozone + "]").html();
+    $('#user_geozones_area_id').html(options);
+    $('#user_geozones_area_id').parent().show();
+  }
+  console.log(geozonesarea);
+  return $('#user_geozone_id').change(function() {
+    geozone = $('#user_geozone_id :selected').text();
+    escaped_geozone = geozone.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
+    options = $(geozonesarea).filter("optgroup[label=" + escaped_geozone + "]").html();
+    console.log(options);
+    if (options) {
+      $('#user_geozones_area_id').html(options);
+      return $('#user_geozones_area_id').parent().show();
+    } else {
+      $('#user_geozones_area_id').empty();
+      return $('#user_geozones_area_id').parent().hide();
     }
-  };
+  });
+});
+}
+};
 }).call(this);
