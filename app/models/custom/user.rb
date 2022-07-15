@@ -80,7 +80,7 @@ class User < ApplicationRecord
   has_many :related_contents, foreign_key: :author_id, inverse_of: :author, dependent: nil
   has_many :topics, foreign_key: :author_id, inverse_of: :author
   belongs_to :geozone
-
+  belongs_to :geozones_area
   validates :username, presence: true, if: :username_required?
   validates :username, uniqueness: { scope: :registering_with_oauth }, if: :username_required?
   validates :document_number, uniqueness: { scope: :document_type }, allow_nil: true
@@ -104,6 +104,7 @@ class User < ApplicationRecord
   validates :domicilio, presence: true, if: :domicilio_required?
 
   validates :geozone_id, inclusion: { in: 1..30 }
+  validates :geozones_area_id, inclusion: { in: 0..100 }
 
   validates_attachment_presence :cif, if: :cif_required?
   validates_attachment :cif, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/tiff"] }
