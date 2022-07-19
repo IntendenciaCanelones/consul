@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_19_082824) do
+ActiveRecord::Schema.define(version: 2022_07_08_175526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -602,6 +602,14 @@ ActiveRecord::Schema.define(version: 2021_07_19_082824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "census_code"
+  end
+
+  create_table "geozones_areas", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "geozone_id"
+    t.index ["geozone_id"], name: "index_geozones_areas_on_geozone_id"
   end
 
   create_table "geozones_polls", id: :serial, force: :cascade do |t|
@@ -1579,9 +1587,11 @@ ActiveRecord::Schema.define(version: 2021_07_19_082824) do
     t.bigint "constancia_file_size"
     t.datetime "constancia_updated_at"
     t.string "domicilio"
+    t.integer "geozones_area_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["geozone_id"], name: "index_users_on_geozone_id"
+    t.index ["geozones_area_id"], name: "index_users_on_geozones_area_id"
     t.index ["hidden_at"], name: "index_users_on_hidden_at"
     t.index ["password_changed_at"], name: "index_users_on_password_changed_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -1712,6 +1722,7 @@ ActiveRecord::Schema.define(version: 2021_07_19_082824) do
   add_foreign_key "failed_census_calls", "users"
   add_foreign_key "flags", "users"
   add_foreign_key "follows", "users"
+  add_foreign_key "geozones_areas", "geozones"
   add_foreign_key "geozones_polls", "geozones"
   add_foreign_key "geozones_polls", "polls"
   add_foreign_key "identities", "users"
@@ -1744,5 +1755,6 @@ ActiveRecord::Schema.define(version: 2021_07_19_082824) do
   add_foreign_key "related_content_scores", "users"
   add_foreign_key "sdg_managers", "users"
   add_foreign_key "users", "geozones"
+  add_foreign_key "users", "geozones_areas"
   add_foreign_key "valuators", "users"
 end
