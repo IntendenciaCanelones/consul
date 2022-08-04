@@ -5,7 +5,7 @@ class AccountController < ApplicationController
 
   def show
    geo = @account.geozones_area_id
-   if geo.blank?
+   if geo.blank? || geo==0
    flash[:alert] = "Debe seleccionar el barrio para continuar"
   end
  end

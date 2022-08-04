@@ -28,6 +28,6 @@ class Users::SessionsController < Devise::SessionsController
     end
     def geozones_area_verified?
       geo = @user.geozones_area_id
-      return true if geo.blank?
+      return true if geo.blank? || geo==0
     end
 end
