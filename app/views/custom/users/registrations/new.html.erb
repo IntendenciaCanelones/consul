@@ -33,10 +33,10 @@
 	<%= f.select :gender, [["Prefiero no indicar", 1], ["Hombre", :male], ["Mujer", :female]],
 				label: t("devise_views.users.registrations.new.gender"),
 				hint: t("devise_views.users.registrations.new.gender_note") %>
-
+        <!--
 	<%= f.file_field :cif, label: t("devise_views.users.registrations.new.cif_label"),
 				hint: t("devise_views.users.registrations.new.cif_note") %>
-
+        -->
 	<%= f.text_field :domicilio, label: t("devise_views.users.registrations.new.domicilio") %>
 
 	<div class="field">

@@ -106,9 +106,9 @@ class User < ApplicationRecord
   validates :geozone_id, inclusion: { in: 1..30 }
   validates :geozones_area_id, inclusion: { in: 0..100 }
 
-  validates_attachment_presence :cif, if: :cif_required?
-  validates_attachment :cif, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/tiff"] }
-  validates_attachment_size :cif, :in => 0.megabytes..20.megabytes
+  #validates_attachment_presence :cif, if: :cif_required?
+  #validates_attachment :cif, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/tiff"] }
+  #validates_attachment_size :cif, :in => 0.megabytes..20.megabytes
 
   validates_associated :organization, message: false
 
@@ -366,9 +366,9 @@ class User < ApplicationRecord
     !organization? && !erased?
   end
 
-  def cif_required?
-    !organization? && !erased?
-  end
+  #def cif_required?
+    #!organization? && !erased?
+  #end
 
   def email_required?
     !organization? && !erased?
