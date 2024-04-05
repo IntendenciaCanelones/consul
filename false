@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20240405134239_add_terms_of_declaration_to_users.rb

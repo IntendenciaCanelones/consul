@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_08_175526) do
+ActiveRecord::Schema.define(version: 2024_04_05_152439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1588,6 +1588,7 @@ ActiveRecord::Schema.define(version: 2022_07_08_175526) do
     t.datetime "constancia_updated_at"
     t.string "domicilio"
     t.integer "geozones_area_id"
+    t.boolean "terms_of_declaration", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["geozone_id"], name: "index_users_on_geozone_id"
