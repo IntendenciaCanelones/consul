@@ -46,6 +46,8 @@
         <%= f.grouped_collection_select :geozones_area_id, Geozone.order(:name), :geozones_areas, :name, :id, :name %>
         </div>
 
+      <%= f.text_field :phone_number, label: t("devise_views.users.registrations.new.phone_number") %>
+
       <%= f.password_field :password, autocomplete: "off", hint: "La contraseña debe tener al menos 8 caracteres" %>
 
       <%= f.password_field :password_confirmation, autocomplete: "off",
@@ -59,6 +61,14 @@
         title: t("devise_views.users.registrations.new.terms_title"),
         label: t("devise_views.users.registrations.new.terms",
                  terms: link_to(t("devise_views.users.registrations.new.terms_link"), "/conditions",
+                                title: t("shared.target_blank"),
+                                target: "_blank")
+                ) %>
+
+      <%= f.check_box :terms_of_declaration,
+        title: t("devise_views.users.registrations.new.terms_title_2"),
+        label: t("devise_views.users.registrations.new.terms_2",
+                 terms_2: link_to(t("devise_views.users.registrations.new.terms_link_2"), "/declaration",
                                 title: t("shared.target_blank"),
                                 target: "_blank")
                 ) %>

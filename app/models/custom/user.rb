@@ -89,6 +89,7 @@ class User < ApplicationRecord
 
   validates :official_level, inclusion: { in: 0..5 }
   validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
+  validates :terms_of_declaration, acceptance: { allow_nil: false }, on: :create
 
   validates :email, presence: true, if: :email_required?
 
@@ -102,6 +103,8 @@ class User < ApplicationRecord
   validate :validate_age?
 
   validates :domicilio, presence: true, if: :domicilio_required?
+
+  validates :phone_number, presence: true, if: :phone_number_required?
 
   validates :geozone_id, inclusion: { in: 1..30 }
   validates :geozones_area_id, inclusion: { in: 0..100 }
@@ -162,6 +165,7 @@ class User < ApplicationRecord
       oauth_email: oauth_email,
       password: Devise.friendly_token[0, 20],
       terms_of_service: "1",
+      terms_of_declaration: "1",
       confirmed_at: oauth_email_confirmed ? DateTime.current : nil
     )
   end
@@ -431,6 +435,10 @@ class User < ApplicationRecord
   end
 
   def domicilio_required?
+    !organization? && !erased?
+  end
+
+  def phone_number_required?
     !organization? && !erased?
   end
 
