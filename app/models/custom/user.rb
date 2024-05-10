@@ -104,7 +104,7 @@ class User < ApplicationRecord
 
   validates :domicilio, presence: true, if: :domicilio_required?
 
-  validates :phone_number, presence: true, if: :phone_number_required?
+  validates :phone_number, presence: true, on: :create
 
   validates :geozone_id, inclusion: { in: 1..30 }
   validates :geozones_area_id, inclusion: { in: 0..100 }
