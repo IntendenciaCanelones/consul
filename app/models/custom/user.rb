@@ -109,6 +109,8 @@ class User < ApplicationRecord
   validates :geozone_id, inclusion: { in: 1..30 }
   validates :geozones_area_id, inclusion: { in: 0..100 }
 
+  validates :email, confirmation: true
+
   #validates_attachment_presence :cif, if: :cif_required?
   #validates_attachment :cif, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/tiff"] }
   #validates_attachment_size :cif, :in => 0.megabytes..20.megabytes
@@ -117,7 +119,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :organization, update_only: true
 
-  attr_accessor :skip_password_validation, :use_redeemable_code, :login
+  attr_accessor :skip_password_validation, :use_redeemable_code, :login, :email_confirmation
 
   scope :administrators, -> { joins(:administrator) }
   scope :moderators,     -> { joins(:moderator) }

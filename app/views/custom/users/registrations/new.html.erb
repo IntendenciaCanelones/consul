@@ -24,11 +24,14 @@
 
       <%= f.email_field :email %>
 
+      <%= f.email_field :email_confirmation, label: t("devise_views.users.registrations.new.email_confirmation_label") %>
+
         <%= f.text_field :document_number,
 				placeholder: t("devise_views.users.registrations.new.document_label"),
 				label: t("devise_views.users.registrations.new.document_number") %>
 
-        <%= f.date_field :date_of_birth, label: t("devise_views.users.registrations.new.date_of_birth_label") %>
+        <%= f.date_field :date_of_birth, label: t("devise_views.users.registrations.new.date_of_birth_label"),
+                                          hint: t("devise_views.users.registrations.new.date_of_birth_help") %>
 
 	<%= f.select :gender, [["Prefiero no indicar", 1], ["Hombre", :male], ["Mujer", :female]],
 				label: t("devise_views.users.registrations.new.gender"),

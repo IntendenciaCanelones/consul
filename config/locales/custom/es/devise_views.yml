@@ -101,9 +101,11 @@ es:
           organization_signup_link: Regístrate aquí
           document_label: Sólo números
           document_number: Cédula de Identidad
+          email_confirmation_label: Confirme nuevamente el email
           domicilio: Domicilio
           domicilio_label: Domicilio
           date_of_birth_label: Fecha de nacimiento
+          date_of_birth_help: Presione en el año del menú desplegable para cambiar el año con mayor facilidad
           gender: Género
           gender_note: Sólo con fines estadísticos.
           cif_label: Adjunte imagen del frente de la cédula de identidad<br>en formato JPEG, PNG o TIFF

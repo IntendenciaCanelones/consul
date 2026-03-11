@@ -97,4 +97,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # ------------------------------------------------------------
+  # Trust nginx (local) as reverse proxy to get real client IP
+  # ------------------------------------------------------------
+  require "ipaddr"
+
+  config.action_dispatch.trusted_proxies = [
+    IPAddr.new("127.0.0.1"),
+    IPAddr.new("::1")
+  ]
 end
